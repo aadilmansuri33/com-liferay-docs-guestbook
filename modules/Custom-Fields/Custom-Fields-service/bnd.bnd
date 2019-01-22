@@ -1,0 +1,8 @@
+Bundle-Name: Custom-Fields-service
+Bundle-SymbolicName: com.aadil.custom.fields.service
+Bundle-Version: 1.0.0
+Liferay-Require-SchemaVersion: 1.0.0
+Liferay-Service: true
+Export-Package: \
+	com.aadil.custom.fields.model.impl,\
+	com.aadil.custom.fields.model

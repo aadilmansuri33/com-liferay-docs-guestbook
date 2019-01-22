@@ -9,6 +9,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
+import javax.portlet.ProcessAction;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -20,7 +21,9 @@ import com.liferay.docs.guestbook.model.Guestbook;
 import com.liferay.docs.guestbook.portlet.constants.GuestbookPortletKeys;
 import com.liferay.docs.guestbook.service.EntryLocalService;
 import com.liferay.docs.guestbook.service.GuestbookLocalService;
+import com.liferay.docs.guestbook.service.GuestbookLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -62,8 +65,9 @@ public class GuestbookPortlet extends MVCPortlet {
 
 				SessionMessages.add(request, "entryAdded");
 
+				Guestbook guestbook = GuestbookLocalServiceUtil.getGuestbook(guestbookId);
+				guestbook.setExpandoBridgeAttributes(serviceContext);
 				response.setRenderParameter("guestbookId", Long.toString(guestbookId));
-
 			} catch (Exception e) {
 				System.out.println(e);
 
@@ -145,6 +149,33 @@ public class GuestbookPortlet extends MVCPortlet {
 		super.render(renderRequest, renderResponse);
 	}
 
+	/*
+	 * @ProcessAction(name = "updateUserCustomeField") public void
+	 * updateUserCustomeField(ActionRequest actionRequest, ActionResponse
+	 * actionResponse) throws PortalException {
+	 * 
+	 * ServiceContext context =
+	 * ServiceContextFactory.getInstance(User.class.getName(), actionRequest);
+	 * 
+	 * User user = PortalUtil.getUser(actionRequest);
+	 * 
+	 * user.setExpandoBridgeAttributes(context);
+	 * 
+	 * UserLocalServiceUtil.updateUser(user);
+	 * 
+	 * }
+	 */
+	/*
+	 * @ProcessAction(name = "addUserCustomeField") public void
+	 * addUserCustomeField(ActionRequest actionRequest, ActionResponse
+	 * actionResponse) throws IOException, PortletException, PortalException,
+	 * SystemException {
+	 * 
+	 * String customField = ParamUtil.getString(actionRequest, "customField", "");
+	 * long guestbookId = ParamUtil.getLong(actionRequest, "guestbookId"); Guestbook
+	 * guestbook = GuestbookLocalServiceUtil.getGuestbook(guestbookId);
+	 * guestbook.getExpandoBridge().addAttribute(customField); }
+	 */
 	@Reference(unbind = "-")
 	protected void setEntryService(EntryLocalService entryLocalService) {
 		_entryLocalService = entryLocalService;

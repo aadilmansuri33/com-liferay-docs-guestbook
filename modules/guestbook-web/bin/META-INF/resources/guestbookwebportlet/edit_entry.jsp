@@ -1,3 +1,8 @@
+<%@page import="java.util.Collections"%>
+<%@page
+	import="com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil"%>
+<%@page import="com.liferay.expando.kernel.util.ExpandoBridgeFactory"%>
+<%@page import="com.liferay.expando.kernel.model.ExpandoBridge"%>
 <%@include file="../init.jsp"%>
 
 <%
@@ -9,6 +14,7 @@
 	}
 
 	long guestbookId = ParamUtil.getLong(renderRequest, "guestbookId");
+
 %>
 
 <portlet:renderURL var="viewURL">

@@ -1,3 +1,6 @@
+<%@page
+	import="com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil"%>
+<%@page import="com.liferay.expando.kernel.model.ExpandoBridge"%>
 <%@page import="java.util.stream.Collectors"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
@@ -54,7 +57,7 @@
 
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-navigation
-			navigationKeys='<%=new String[] { "all", "Recent by Create", "Recent by Modify" }%>'
+			navigationKeys='<%=new String[] { "all" }%>'
 			navigationParam="entriesNavigation"
 			portletURL="<%=navigationPortletURL%>" />
 
@@ -78,9 +81,9 @@
 
 	<div class="search-form">
 		<span class="aui-search-bar"> <aui:input
-				inlineField="<%=true%>" placeholder="search" label=""
-				name="keywords" size="30" title="search-entries" type="text" /> <aui:button
-				type="submit" value="search" />
+				inlineField="<%=true%>" label="" name="keywords" size="30"
+				title="search-entries" type="text" /> <aui:button type="submit"
+				value="search" />
 		</span>
 	</div>
 </aui:form>
@@ -223,6 +226,29 @@
 
 </liferay-ui:search-container>
 
+<%
+	Guestbook guestbook = GuestbookLocalServiceUtil.getGuestbook(guestbookId);
+	ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(themeDisplay.getCompanyId(),
+			Guestbook.class.getName(), guestbook.getGuestbookId());
+	List<String> list = Collections.list(expandoBridge.getAttributeNames());
+
+//	if (list.size() != 0) {
+%>
+<%-- <liferay-ui:header title="Custom Fields" />
+<%
+	}
+%>
+ --%>
+<liferay-ui:custom-attributes-available
+	className="<%=Guestbook.class.getName()%>">
+	<aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="custom-fields">
+	<liferay-ui:custom-attribute-list
+		classPK="<%=(guestbook != null) ? guestbook.getGuestbookId() : 0%>"
+		className="<%=Guestbook.class.getName()%>" editable="<%=true%>"
+		label="<%=true%>" />
+		</aui:fieldset>
+</liferay-ui:custom-attributes-available>
+
 <liferay-ddm:template-renderer
 	className="<%= Guestbook.class.getName() %>"
 	contextObjects="<%= new HashMap<String, Object>() %>"
@@ -253,3 +279,9 @@
 		No products Available.
 	</c:if>
 </liferay-ddm:template-renderer>
+<%-- 
+<portlet:actionURL  var="addCustomField" name="addUserCustomeField"/>
+<aui:form action="<%= addCustomField %>" method="post" name="fm">
+<aui:input name="customField" label="Custom Field"/>
+<aui:button type="submit" value="Add Custom Field"/>
+</aui:form> --%>

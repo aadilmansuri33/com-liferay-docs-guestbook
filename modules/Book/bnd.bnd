@@ -1,0 +1,4 @@
+Bundle-Name: Book
+Bundle-SymbolicName: com.aadil.custom.fields
+Bundle-Version: 1.0.0
+Export-Package: com.aadil.custom.fields.constants

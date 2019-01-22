@@ -1,3 +1,6 @@
+<%@page import="java.util.Collections"%>
+<%@page import="com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil"%>
+<%@page import="com.liferay.expando.kernel.model.ExpandoBridge"%>
 <%@include file="../init.jsp"%>
 
 <%
@@ -5,8 +8,16 @@
 
 	Guestbook guestbook = null;
 
+	List<String> list;
 	if (guestbookId > 0) {
 		guestbook = GuestbookLocalServiceUtil.getGuestbook(guestbookId);
+		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(themeDisplay.getCompanyId(),
+				Guestbook.class.getName(),guestbook.getGuestbookId());
+		 list = Collections.list(expandoBridge.getAttributeNames());
+	}
+	else{ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(themeDisplay.getCompanyId(),
+			Guestbook.class.getName());
+		 list = Collections.list(expandoBridge.getAttributeNames());
 	}
 %>
 
@@ -41,6 +52,20 @@
 			<aui:input name="tags" type="assetTags" />
 		</aui:fieldset>
 	</liferay-ui:panel>
+		<%if(list.size()!=0) {%>
+		<liferay-ui:panel defaultState="closed" extended="<%=false%>"
+		id="customFieldsPanel" persistState="<%=true%>"
+		title="custom fields">
+		<liferay-ui:custom-attributes-available
+		className="<%=Guestbook.class.getName()%>">
+		<aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="custom-fields">
+		<liferay-ui:custom-attribute-list
+			classPK="<%=(guestbook != null) ? guestbook.getGuestbookId() : 0%>"
+			className="<%=Guestbook.class.getName() %>" editable="<%=true %>" label="<%=true %>" />
+			</aui:fieldset>
+		</liferay-ui:custom-attributes-available>
+		</liferay-ui:panel>
+	<%} %>
 	<liferay-ui:panel defaultState="closed" extended="<%=false%>"
 		id="guestbookAssetLinksPanel" persistState="<%=true%>"
 		title="related-assets">

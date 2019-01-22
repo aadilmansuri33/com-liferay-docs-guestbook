@@ -34,5 +34,4 @@ public class GuestbookAdminPanelApp extends BasePanelApp {
         super.setPortlet(portlet);
     }
 
-
 }

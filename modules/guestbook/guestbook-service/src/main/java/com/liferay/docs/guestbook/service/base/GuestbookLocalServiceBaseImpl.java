@@ -24,6 +24,10 @@ import com.liferay.docs.guestbook.service.GuestbookLocalService;
 import com.liferay.docs.guestbook.service.persistence.EntryPersistence;
 import com.liferay.docs.guestbook.service.persistence.GuestbookPersistence;
 
+import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
+import com.liferay.expando.kernel.service.persistence.ExpandoTablePersistence;
+import com.liferay.expando.kernel.service.persistence.ExpandoValuePersistence;
+
 import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
 import com.liferay.exportimport.kernel.lar.ManifestSummary;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
@@ -729,6 +733,120 @@ public abstract class GuestbookLocalServiceBaseImpl extends BaseLocalServiceImpl
 		this.assetLinkPersistence = assetLinkPersistence;
 	}
 
+	/**
+	 * Returns the expando row local service.
+	 *
+	 * @return the expando row local service
+	 */
+	public com.liferay.expando.kernel.service.ExpandoRowLocalService getExpandoRowLocalService() {
+		return expandoRowLocalService;
+	}
+
+	/**
+	 * Sets the expando row local service.
+	 *
+	 * @param expandoRowLocalService the expando row local service
+	 */
+	public void setExpandoRowLocalService(
+		com.liferay.expando.kernel.service.ExpandoRowLocalService expandoRowLocalService) {
+		this.expandoRowLocalService = expandoRowLocalService;
+	}
+
+	/**
+	 * Returns the expando row persistence.
+	 *
+	 * @return the expando row persistence
+	 */
+	public ExpandoRowPersistence getExpandoRowPersistence() {
+		return expandoRowPersistence;
+	}
+
+	/**
+	 * Sets the expando row persistence.
+	 *
+	 * @param expandoRowPersistence the expando row persistence
+	 */
+	public void setExpandoRowPersistence(
+		ExpandoRowPersistence expandoRowPersistence) {
+		this.expandoRowPersistence = expandoRowPersistence;
+	}
+
+	/**
+	 * Returns the expando table local service.
+	 *
+	 * @return the expando table local service
+	 */
+	public com.liferay.expando.kernel.service.ExpandoTableLocalService getExpandoTableLocalService() {
+		return expandoTableLocalService;
+	}
+
+	/**
+	 * Sets the expando table local service.
+	 *
+	 * @param expandoTableLocalService the expando table local service
+	 */
+	public void setExpandoTableLocalService(
+		com.liferay.expando.kernel.service.ExpandoTableLocalService expandoTableLocalService) {
+		this.expandoTableLocalService = expandoTableLocalService;
+	}
+
+	/**
+	 * Returns the expando table persistence.
+	 *
+	 * @return the expando table persistence
+	 */
+	public ExpandoTablePersistence getExpandoTablePersistence() {
+		return expandoTablePersistence;
+	}
+
+	/**
+	 * Sets the expando table persistence.
+	 *
+	 * @param expandoTablePersistence the expando table persistence
+	 */
+	public void setExpandoTablePersistence(
+		ExpandoTablePersistence expandoTablePersistence) {
+		this.expandoTablePersistence = expandoTablePersistence;
+	}
+
+	/**
+	 * Returns the expando value local service.
+	 *
+	 * @return the expando value local service
+	 */
+	public com.liferay.expando.kernel.service.ExpandoValueLocalService getExpandoValueLocalService() {
+		return expandoValueLocalService;
+	}
+
+	/**
+	 * Sets the expando value local service.
+	 *
+	 * @param expandoValueLocalService the expando value local service
+	 */
+	public void setExpandoValueLocalService(
+		com.liferay.expando.kernel.service.ExpandoValueLocalService expandoValueLocalService) {
+		this.expandoValueLocalService = expandoValueLocalService;
+	}
+
+	/**
+	 * Returns the expando value persistence.
+	 *
+	 * @return the expando value persistence
+	 */
+	public ExpandoValuePersistence getExpandoValuePersistence() {
+		return expandoValuePersistence;
+	}
+
+	/**
+	 * Sets the expando value persistence.
+	 *
+	 * @param expandoValuePersistence the expando value persistence
+	 */
+	public void setExpandoValuePersistence(
+		ExpandoValuePersistence expandoValuePersistence) {
+		this.expandoValuePersistence = expandoValuePersistence;
+	}
+
 	public void afterPropertiesSet() {
 		persistedModelLocalServiceRegistry.register("com.liferay.docs.guestbook.model.Guestbook",
 			guestbookLocalService);
@@ -809,6 +927,18 @@ public abstract class GuestbookLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.liferay.asset.kernel.service.AssetLinkLocalService assetLinkLocalService;
 	@ServiceReference(type = AssetLinkPersistence.class)
 	protected AssetLinkPersistence assetLinkPersistence;
+	@ServiceReference(type = com.liferay.expando.kernel.service.ExpandoRowLocalService.class)
+	protected com.liferay.expando.kernel.service.ExpandoRowLocalService expandoRowLocalService;
+	@ServiceReference(type = ExpandoRowPersistence.class)
+	protected ExpandoRowPersistence expandoRowPersistence;
+	@ServiceReference(type = com.liferay.expando.kernel.service.ExpandoTableLocalService.class)
+	protected com.liferay.expando.kernel.service.ExpandoTableLocalService expandoTableLocalService;
+	@ServiceReference(type = ExpandoTablePersistence.class)
+	protected ExpandoTablePersistence expandoTablePersistence;
+	@ServiceReference(type = com.liferay.expando.kernel.service.ExpandoValueLocalService.class)
+	protected com.liferay.expando.kernel.service.ExpandoValueLocalService expandoValueLocalService;
+	@ServiceReference(type = ExpandoValuePersistence.class)
+	protected ExpandoValuePersistence expandoValuePersistence;
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
 }

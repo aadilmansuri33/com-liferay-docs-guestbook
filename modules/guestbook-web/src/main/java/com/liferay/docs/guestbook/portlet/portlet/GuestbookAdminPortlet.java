@@ -3,12 +3,15 @@
  */
 package com.liferay.docs.guestbook.portlet.portlet;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
+import javax.portlet.PortletException;
+import javax.portlet.ProcessAction;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -16,7 +19,9 @@ import org.osgi.service.component.annotations.Reference;
 import com.liferay.docs.guestbook.model.Guestbook;
 import com.liferay.docs.guestbook.portlet.constants.GuestbookPortletKeys;
 import com.liferay.docs.guestbook.service.GuestbookLocalService;
+import com.liferay.docs.guestbook.service.GuestbookLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
@@ -97,6 +102,7 @@ public class GuestbookAdminPortlet extends MVCPortlet {
 			Logger.getLogger(GuestbookAdminPortlet.class.getName()).log(Level.SEVERE, null, pe);
 		}
 	}
+
 
 	private GuestbookLocalService _guestbookLocalService;
 

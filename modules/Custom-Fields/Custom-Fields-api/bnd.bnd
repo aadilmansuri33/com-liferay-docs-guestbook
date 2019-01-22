@@ -1,0 +1,9 @@
+Bundle-Name: Custom-Fields-api
+Bundle-SymbolicName: com.aadil.custom.fields.api
+Bundle-Version: 1.0.0
+Export-Package: \
+	com.aadil.custom.fields.exception,\
+	com.aadil.custom.fields.service,\
+	com.aadil.custom.fields.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../Custom-Fields-service/service.xml
